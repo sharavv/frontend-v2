@@ -1,4 +1,4 @@
-// === AI Entertainment Recommender Unified Script (Final Fixed) ===
+// === AI Entertainment Recommender Unified Script (FINAL COMPATIBLE) ===
 (async function () {
   console.log("🚀 Script loaded and running...");
 
@@ -14,7 +14,7 @@
     }
   }
 
-  // Generic handler to call backend
+  // --- Generic handler ---
   async function handleRecommendation(type, query, resDiv) {
     resDiv.innerHTML = `<p style="color:var(--muted)">🔍 Searching ${type}s...</p>`;
     if (!query) {
@@ -40,7 +40,7 @@
     renderResults(data.recommendations || [], resDiv, type);
   }
 
-  // --- Event listeners ---
+  // --- Button listeners ---
   const movieGo = document.getElementById("movieGo");
   if (movieGo) {
     movieGo.addEventListener("click", async () => {
@@ -79,34 +79,30 @@
     }
 
     items.forEach((it) => {
-      const title = typeof it === "string" ? it : it.title || it.name || "Unknown";
-      const poster =
-        typeof it === "object" && it.poster_path
-          ? `https://image.tmdb.org/t/p/w300${it.poster_path}`
-          : typeof it === "object" && it.album_image
-          ? it.album_image
-          : `https://via.placeholder.com/300x450?text=${encodeURIComponent(title)}`;
+      const title = it.title || it.name || "Unknown";
+      const image = it.poster || it.image || `https://via.placeholder.com/300x450?text=${encodeURIComponent(title)}`;
+      const subtitle =
+        type === "song"
+          ? `${it.artist || ""} · ${it.album || ""}`
+          : it.release_date || it.first_air_date || "";
 
-      const date =
-        typeof it === "object"
-          ? it.release_date || it.first_air_date || ""
-          : "";
-      const artist =
-        typeof it === "object" && it.artists ? ` · ${it.artists}` : "";
+      const linkUrl =
+        type === "song" && it.spotify_url
+          ? it.spotify_url
+          : `https://www.google.com/search?q=${encodeURIComponent(title + " " + type)}`;
 
+      // Card element
       const card = document.createElement("div");
       card.className = "card result-item";
 
       const link = document.createElement("a");
       link.className = "card-link";
-      link.href = `https://www.google.com/search?q=${encodeURIComponent(
-        title + " " + type
-      )}`;
+      link.href = linkUrl;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
 
       const img = document.createElement("img");
-      img.src = poster;
+      img.src = image;
       img.alt = title;
 
       const h4 = document.createElement("h4");
@@ -114,7 +110,7 @@
 
       const meta = document.createElement("div");
       meta.className = "meta";
-      meta.textContent = `${date}${artist}`;
+      meta.textContent = subtitle;
 
       link.appendChild(img);
       link.appendChild(h4);
