@@ -108,53 +108,64 @@
   }
 
   // --- Shared renderer for all types ---
-  function renderResults(items, container, type) {
-    console.log(`🎬 Rendering ${items?.length || 0} ${type} results...`);
-    container.innerHTML = "";
+ // --- Shared renderer for all types ---
+function renderResults(items, container, type) {
+  console.log(`🎬 Rendering ${items?.length || 0} ${type} results...`);
+  container.innerHTML = "";
 
-    if (!items || items.length === 0) {
-      container.innerHTML = '<p style="color:var(--muted)">No results found.</p>';
-      return;
-    }
-
-    items.forEach((it) => {
-      const title = it.title || it.name || "Unknown";
-      const poster = it.poster_path
-        ? `https://image.tmdb.org/t/p/w300${it.poster_path}`
-        : it.album_image || "https://via.placeholder.com/300x450?text=No+Image";
-      const date = it.release_date || it.first_air_date || "";
-      const artist = it.artists ? ` · ${it.artists}` : "";
-
-      // Build card
-      const card = document.createElement("div");
-      card.className = "card result-item";
-
-      const link = document.createElement("a");
-      link.className = "card-link";
-      link.href = `https://www.google.com/search?q=${encodeURIComponent(
-        title + " " + type
-      )}`;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-
-      const img = document.createElement("img");
-      img.src = poster;
-      img.alt = title;
-
-      const h4 = document.createElement("h4");
-      h4.textContent = title;
-
-      const meta = document.createElement("div");
-      meta.className = "meta";
-      meta.textContent = `${date}${artist}`;
-
-      link.appendChild(img);
-      link.appendChild(h4);
-      link.appendChild(meta);
-      card.appendChild(link);
-      container.appendChild(card);
-    });
-
-    console.log("✅ Rendering complete.");
+  if (!items || items.length === 0) {
+    container.innerHTML = '<p style="color:var(--muted)">No results found.</p>';
+    return;
   }
+
+  // Handle both string lists and object lists gracefully
+  items.forEach((it) => {
+    const title = typeof it === "string" ? it : it.title || it.name || "Unknown";
+    const poster =
+      typeof it === "object" && it.poster_path
+        ? `https://image.tmdb.org/t/p/w300${it.poster_path}`
+        : typeof it === "object" && it.album_image
+        ? it.album_image
+        : `https://via.placeholder.com/300x450?text=${encodeURIComponent(title)}`;
+
+    const date =
+      typeof it === "object"
+        ? it.release_date || it.first_air_date || ""
+        : "";
+    const artist =
+      typeof it === "object" && it.artists ? ` · ${it.artists}` : "";
+
+    // Build card
+    const card = document.createElement("div");
+    card.className = "card result-item";
+
+    const link = document.createElement("a");
+    link.className = "card-link";
+    link.href = `https://www.google.com/search?q=${encodeURIComponent(
+      title + " " + type
+    )}`;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    const img = document.createElement("img");
+    img.src = poster;
+    img.alt = title;
+
+    const h4 = document.createElement("h4");
+    h4.textContent = title;
+
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.textContent = `${date}${artist}`;
+
+    link.appendChild(img);
+    link.appendChild(h4);
+    link.appendChild(meta);
+    card.appendChild(link);
+    container.appendChild(card);
+  });
+
+  console.log("✅ Rendering complete.");
+}
+
 })();
