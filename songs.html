@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MoodTune – Songs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="songs-page">
+  <div class="shimmer" aria-hidden="true"></div>
+  <header class="header">
+    <div class="container">
+      <div class="brand"><h1>🎧 MoodTune</h1></div>
+      <nav class="nav"><a href="index.html">Home</a><a href="movies.html">Movies</a><a href="tv.html">TV Shows</a><a href="songs.html">Songs</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h2>Get AI Music Picks</h2>
+        <p style="color:var(--muted)">Type your vibe, like "chill sunset songs" or "upbeat motivation tracks".</p>
+        <div style="margin-top:16px" class="search-box"><input id="songInput" type="text" placeholder="e.g. chill sunset songs"><button class="btn btn-white" id="songGo">Get Songs</button></div>
+        <div style="margin-top:18px" id="songResults" class="grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container"><small>Music background in MoodTune style.</small></div></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

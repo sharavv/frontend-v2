@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Entertainment Recommender - Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="home-page">
+  <div class="shimmer" aria-hidden="true"></div>
+  <header class="header">
+    <div class="container">
+      <div class="brand"><h1>🎬 AI Recommender</h1></div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="tv.html">TV Shows</a>
+        <a href="songs.html">Songs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="main-hero">
+      <div class="hero-inner">
+        <div class="lead">
+          <h2>Find your next favorite — instantly</h2>
+          <p>Tell our AI your mood or what you’re craving. Get smart recommendations across movies, TV shows and songs — tailored to your vibe.</p>
+          <div class="tagline" id="tagline">🎬 Watch • 🎵 Listen • 📺 Feel</div>
+
+          <!-- search + Top Picks moved directly below -->
+          <div style="margin-top:14px" class="search-box">
+            <input id="quickInput" type="text" placeholder="e.g. 'funny romantic movie' or 'energetic workout songs'">
+            <select id="quickType"><option value="movie">Movie</option><option value="tv">TV</option><option value="song">Song</option></select>
+            <button class="btn btn-white" id="quickGo">Get quick picks</button>
+          </div>
+
+          <!-- Top Picks moved here: compact horizontal grid under search -->
+          <div style="margin-top:14px">
+            <h4 style="margin:10px 0 8px 0;color:var(--text)">Top Picks</h4>
+            <div class="grid" id="topPicks">
+              <div class="card">
+                <img src="https://image.tmdb.org/t/p/w500/9kg73Mg8WJKlB9Y2SAJzeDKAnuB.jpg" alt="Interstellar poster">
+                <h4>Interstellar</h4>
+                <div class="meta">Sci-Fi · 2014</div>
+              </div>
+
+              <div class="card">
+                <img src="https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" alt="Grand Budapest poster">
+                <h4>The Grand Budapest Hotel</h4>
+                <div class="meta">Comedy · 2014</div>
+              </div>
+
+              <div class="card">
+                <img src="https://image.tmdb.org/t/p/w500/2l5FQmJ6kVCb9d2Qn6o1NQe2b7U.jpg" alt="Parasite poster">
+                <h4>Parasite</h4>
+                <div class="meta">Thriller · 2019</div>
+              </div>
+
+              <div class="card">
+                <img src="https://image.tmdb.org/t/p/w500/4K1Cpu0bqOa5QFx3B5bqQ6EJY1k.jpg" alt="Moonlight poster">
+                <h4>Moonlight</h4>
+                <div class="meta">Drama · 2016</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px" class="cta-row">
+            <a class="btn btn-white" href="movies.html">Explore Movies</a>
+            <a class="btn btn-white" href="tv.html">Explore TV</a>
+            <a class="btn btn-white" href="songs.html">Find Songs</a>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h3 style="margin-top:0">Daily Mix</h3>
+          <p style="color:var(--muted)">Curated picks for today.</p>
+          <div class="grid" id="dailyMix">
+            <div class="card">
+              <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="Uncharted poster">
+              <h4>Uncharted</h4>
+              <div class="meta">Action · 2022</div>
+            </div>
+            <div class="card">
+              <img src="https://image.tmdb.org/t/p/w500/6agKYU5IQFpuDyUYPu39w7UCRrJ.jpg" alt="Sherlock poster">
+              <h4>Sherlock</h4>
+              <div class="meta">Mystery · 2010</div>
+            </div>
+            <div class="card">
+              <img src="https://image.tmdb.org/t/p/w500/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="Inception poster">
+              <h4>Inception</h4>
+              <div class="meta">Sci-Fi · 2010</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- removed old Top Picks below; keep other sections as needed -->
+    <section class="section">
+      <h3 style="margin-top:0">Explore categories</h3>
+      <p style="color:var(--muted)">Browse curated lists or use search for custom picks.</p>
+      <!-- placeholder grid (can be removed) -->
+      <div class="grid">
+        <div class="card"><img src="https://image.tmdb.org/t/p/w500/9kg73Mg8WJKlB9Y2SAJzeDKAnuB.jpg" alt=""><h4>Interstellar</h4><div class="meta">Sci-Fi · 2014</div></div>
+        <div class="card"><img src="https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" alt=""><h4>The Grand Budapest Hotel</h4><div class="meta">Comedy · 2014</div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container"><small>Backend must be running on <code>http://localhost:5000</code>. Enjoy!</small></div></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

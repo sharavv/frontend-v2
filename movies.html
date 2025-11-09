@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Recommender - Movies</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="movies-page">
+  <div class="shimmer" aria-hidden="true"></div>
+  <header class="header">
+    <div class="container">
+      <div class="brand"><h1>🎬 AI Recommender</h1></div>
+      <nav class="nav"><a href="index.html">Home</a><a href="movies.html">Movies</a><a href="tv.html">TV Shows</a><a href="songs.html">Songs</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h2>Movies</h2>
+        <p style="color:var(--muted)">Type your mood or a short prompt and the AI will find films that match the vibe.</p>
+        <div style="margin-top:16px" class="search-box"><input id="movieInput" type="text" placeholder="e.g. mysterious slow-burn thriller"><button class="btn btn-white" id="movieGo">Get Movies</button></div>
+        <div style="margin-top:18px" id="movieResults"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container"><small>Tip: try "mind-bending + slow" or "light romantic comedy".</small></div></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

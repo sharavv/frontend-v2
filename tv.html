@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Recommender - TV Shows</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="tv-page">
+  <div class="shimmer" aria-hidden="true"></div>
+  <header class="header">
+    <div class="container">
+      <div class="brand"><h1>📺 AI Recommender</h1></div>
+      <nav class="nav"><a href="index.html">Home</a><a href="movies.html">Movies</a><a href="tv.html">TV Shows</a><a href="songs.html">Songs</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h2>TV Shows</h2>
+        <p style="color:var(--muted)">Describe what you want to watch — tone, pacing, or shows you liked.</p>
+        <div style="margin-top:16px" class="search-box"><input id="tvInput" type="text" placeholder="e.g. dark psychological drama"><button class="btn btn-white" id="tvGo">Get TV Picks</button></div>
+        <div style="margin-top:18px" id="tvResults"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container"><small>Tip: include 1–2 example shows you liked to improve suggestions.</small></div></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
