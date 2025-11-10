@@ -28,7 +28,7 @@
       }
 
       console.log("🎥 Movie query:", q);
-      const resp = await safeFetch("https://ai-recommender-backend-8ocj9v1ez-sharavvs-projects.vercel.app/api/recommend", {
+      const resp = await safeFetch("https://entertainment-ai-api.vercel.app/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ input: q }),
@@ -59,7 +59,7 @@
       }
 
       console.log("📺 TV query:", q);
-      const resp = await safeFetch("https://ai-recommender-backend-8ocj9v1ez-sharavvs-projects.vercel.app/api/recommend", {
+      const resp = await safeFetch("https://entertainment-ai-api.vercel.app/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ input: q }),
@@ -90,7 +90,7 @@
       }
 
       console.log("🎵 Song query:", q);
-      const resp = await safeFetch("https://ai-recommender-backend-8ocj9v1ez-sharavvs-projects.vercel.app/api/recommend", {
+      const resp = await safeFetch("https://entertainment-ai-api.vercel.app/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ input: q }),
