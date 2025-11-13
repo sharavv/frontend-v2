@@ -1,4 +1,4 @@
-// === AI Entertainment Recommender Unified Script (FINAL COMPATIBLE) ===
+// === AI Entertainment Recommender Frontend (FINAL) ===
 (async function () {
   console.log("🚀 Script loaded and running...");
 
@@ -17,6 +17,7 @@
   // --- Generic handler ---
   async function handleRecommendation(type, query, resDiv) {
     resDiv.innerHTML = `<p style="color:var(--muted)">🔍 Searching ${type}s...</p>`;
+
     if (!query) {
       resDiv.innerHTML = `<p style="color:var(--muted)">Please enter a query.</p>`;
       return;
@@ -24,10 +25,14 @@
 
     console.log(`🔹 Query for ${type}:`, query);
 
+    // Backend now receives type through header ONLY
     const resp = await safeFetch("https://entertainment-ai-api.vercel.app/api/recommend", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ input: query, type }),
+      headers: {
+        "Content-Type": "application/json",
+        "X-Type": type
+      },
+      body: JSON.stringify({ input: query })
     });
 
     if (!resp) {
@@ -36,39 +41,37 @@
     }
 
     const data = await resp.json();
-    console.log(`✅ ${type.toUpperCase()} data received:`, data);
+    console.log(`✅ Response received:`, data);
+
     renderResults(data.recommendations || [], resDiv, type);
   }
 
   // --- Button listeners ---
-  const movieGo = document.getElementById("movieGo");
-  if (movieGo) {
-    movieGo.addEventListener("click", async () => {
-      const q = document.getElementById("movieInput").value.trim();
-      const resDiv = document.getElementById("movieResults");
-      await handleRecommendation("movie", q, resDiv);
-    });
-  }
+  document.getElementById("movieGo")?.addEventListener("click", async () => {
+    await handleRecommendation(
+      "movie",
+      document.getElementById("movieInput").value.trim(),
+      document.getElementById("movieResults")
+    );
+  });
 
-  const tvGo = document.getElementById("tvGo");
-  if (tvGo) {
-    tvGo.addEventListener("click", async () => {
-      const q = document.getElementById("tvInput").value.trim();
-      const resDiv = document.getElementById("tvResults");
-      await handleRecommendation("tv", q, resDiv);
-    });
-  }
+  document.getElementById("tvGo")?.addEventListener("click", async () => {
+    await handleRecommendation(
+      "tv",
+      document.getElementById("tvInput").value.trim(),
+      document.getElementById("tvResults")
+    );
+  });
 
-  const songGo = document.getElementById("songGo");
-  if (songGo) {
-    songGo.addEventListener("click", async () => {
-      const q = document.getElementById("songInput").value.trim();
-      const resDiv = document.getElementById("songResults");
-      await handleRecommendation("song", q, resDiv);
-    });
-  }
+  document.getElementById("songGo")?.addEventListener("click", async () => {
+    await handleRecommendation(
+      "song",
+      document.getElementById("songInput").value.trim(),
+      document.getElementById("songResults")
+    );
+  });
 
-  // --- Shared renderer ---
+  // --- Renderer ---
   function renderResults(items, container, type) {
     console.log(`🎬 Rendering ${items?.length || 0} ${type} results...`);
     container.innerHTML = "";
@@ -79,11 +82,18 @@
     }
 
     items.forEach((it) => {
-      const title = it.title || it.name || "Unknown";
-      const image = it.poster || it.image || `https://via.placeholder.com/300x450?text=${encodeURIComponent(title)}`;
+      const title = it.title || it.name || "Untitled";
+
+      const image =
+        it.poster_path
+          ? `https://image.tmdb.org/t/p/w500${it.poster_path}`
+          : it.album_image ||
+            it.image ||
+            `https://via.placeholder.com/300x450?text=${encodeURIComponent(title)}`;
+
       const subtitle =
         type === "song"
-          ? `${it.artist || ""} · ${it.album || ""}`
+          ? `${it.artists || ""}`
           : it.release_date || it.first_air_date || "";
 
       const linkUrl =
@@ -91,7 +101,6 @@
           ? it.spotify_url
           : `https://www.google.com/search?q=${encodeURIComponent(title + " " + type)}`;
 
-      // Card element
       const card = document.createElement("div");
       card.className = "card result-item";
 
